@@ -1,0 +1,83 @@
+{
+  "name": "loglens",
+  "displayName": "LogLens",
+  "description": "在 VS Code 中实时查看与筛选 Android Logcat 日志，接近 Android Studio 体验",
+  "version": "0.1.0",
+  "publisher": "loglens",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Debuggers",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:androidLogcat.start",
+    "onCommand:androidLogcat.refreshDevices"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "androidLogcat.start",
+        "title": "LogLens: Start"
+      },
+      {
+        "command": "androidLogcat.refreshDevices",
+        "title": "LogLens: Refresh Devices"
+      },
+      {
+        "command": "androidLogcat.pause",
+        "title": "LogLens: Pause"
+      },
+      {
+        "command": "androidLogcat.resume",
+        "title": "LogLens: Resume"
+      },
+      {
+        "command": "androidLogcat.clear",
+        "title": "LogLens: Clear"
+      },
+      {
+        "command": "androidLogcat.copySelected",
+        "title": "LogLens: Copy Selected"
+      },
+      {
+        "command": "androidLogcat.exportToFile",
+        "title": "LogLens: Export to File"
+      },
+      {
+        "command": "androidLogcat.applyFilterPreset",
+        "title": "LogLens: Apply Filter Preset"
+      }
+    ],
+    "configuration": {
+      "title": "LogLens",
+      "properties": {
+        "androidLogcat.maxLogLines": {
+          "type": "number",
+          "default": 100000,
+          "minimum": 1000,
+          "maximum": 500000,
+          "description": "最大缓存日志行数，超出后丢弃旧日志"
+        },
+        "androidLogcat.adbPath": {
+          "type": "string",
+          "default": "adb",
+          "description": "adb 可执行文件路径，默认使用系统 PATH 中的 adb"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,129 @@
+/* LogLens - Webview 样式 */
+:root {
+  --bg: #1e1e1e;
+  --fg: #d4d4d4;
+  --level-v: #808080;
+  --level-d: #4ec9b0;
+  --level-i: #4fc1ff;
+  --level-w: #dcdcaa;
+  --level-e: #f48771;
+  --level-f: #f14c4c;
+  --level-s: #808080;
+  --border: #333;
+  --toolbar-bg: #252526;
+  --input-bg: #3c3c3c;
+  --row-hover: #2a2d2e;
+  --row-selected: #094771;
+  --font-mono: "SF Mono", "Fira Code", "Cascadia Code", Consolas, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; overflow: hidden; font-family: var(--font-mono); font-size: 12px; background: var(--bg); color: var(--fg); }
+
+#app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* 工具栏 */
+.toolbar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: var(--toolbar-bg);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.toolbar label { color: #999; margin-right: 4px; }
+.toolbar select, .toolbar input[type="text"] {
+  background: var(--input-bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  min-width: 0;
+}
+.toolbar input[type="text"] { min-width: 120px; }
+.toolbar button {
+  background: var(--input-bg);
+  color: var(--fg);
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.toolbar button:hover { background: #505050; }
+.toolbar button.primary { background: #0e639c; border-color: #0e639c; }
+.toolbar button.primary:hover { background: #1177bb; }
+.toolbar .sep { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+.toolbar .level-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+.toolbar .level-chips span {
+  display: inline-flex; align-items: center; padding: 2px 6px; border-radius: 4px;
+  cursor: pointer; font-size: 11px; border: 1px solid transparent;
+}
+.toolbar .level-chips span.checked { border-color: currentColor; }
+.toolbar .level-chips span[data-level="V"] { color: var(--level-v); }
+.toolbar .level-chips span[data-level="D"] { color: var(--level-d); }
+.toolbar .level-chips span[data-level="I"] { color: var(--level-i); }
+.toolbar .level-chips span[data-level="W"] { color: var(--level-w); }
+.toolbar .level-chips span[data-level="E"] { color: var(--level-e); }
+.toolbar .level-chips span[data-level="F"] { color: var(--level-f); }
+
+/* 状态栏 */
+.status {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  background: var(--toolbar-bg);
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: #858585;
+}
+.status.error { color: var(--level-e); }
+
+/* 日志区域 */
+.log-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  outline: none;
+}
+.log-inner {
+  position: relative;
+  min-height: 100%;
+}
+.log-line {
+  display: flex;
+  align-items: flex-start;
+  padding: 2px 10px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  border-bottom: 1px solid transparent;
+  cursor: default;
+  line-height: 1.4;
+}
+.log-line:hover { background: var(--row-hover); }
+.log-line.selected { background: var(--row-selected); }
+.log-line .time { flex-shrink: 0; color: #858585; margin-right: 8px; }
+.log-line .pid { flex-shrink: 0; color: #569cd6; margin-right: 6px; cursor: pointer; }
+.log-line .tid { flex-shrink: 0; color: #569cd6; margin-right: 6px; }
+.log-line .level { flex-shrink: 0; width: 14px; text-align: center; margin-right: 6px; font-weight: bold; }
+.log-line .tag { flex-shrink: 0; max-width: 180px; overflow: hidden; text-overflow: ellipsis; margin-right: 8px; cursor: pointer; }
+.log-line .msg { flex: 1; min-width: 0; }
+.log-line[data-level="V"] .level { color: var(--level-v); }
+.log-line[data-level="D"] .level { color: var(--level-d); }
+.log-line[data-level="I"] .level { color: var(--level-i); }
+.log-line[data-level="W"] .level { color: var(--level-w); }
+.log-line[data-level="E"] .level { color: var(--level-e); }
+.log-line[data-level="F"] .level { color: var(--level-f); }
+.log-line[data-level="S"] .level { color: var(--level-s); }
+
+/* 空状态 */
+.empty { padding: 20px; text-align: center; color: #858585; }
+
+/* 筛选面板（折叠） */
+.filter-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
